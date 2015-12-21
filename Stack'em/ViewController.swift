@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         didSet {
             characterOneButton.setTitle("", forState: UIControlState.Normal)
             characterOneButton.alpha = 0
-            characterOneButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit;
+            characterOneButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill;
         }
     }
     
@@ -68,12 +68,23 @@ class ViewController: UIViewController {
         didSet {
             characterTwoButton.setTitle("", forState: UIControlState.Normal)
             characterTwoButton.alpha = 0
-            characterTwoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+            characterTwoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFill
         }
     }
     
     
-    @IBOutlet var descriptionVerticalStackView: UIStackView!
+    @IBOutlet var descriptionVerticalStackView: UIStackView! {
+        didSet {
+            
+            /*
+                backgroundColor property doesn't work for UIStackView
+                REASON: UIStackView is a subclass of UIView. Hence, it inherits the property of backgroundColor. However, UIStackView is a non-drawing view. What this means is drawRect method is never called, and thus, no background color
+            
+            */
+            
+//            descriptionVerticalStackView.backgroundColor = UIColor.redColor()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
